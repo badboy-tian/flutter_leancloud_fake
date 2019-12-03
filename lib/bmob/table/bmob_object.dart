@@ -14,11 +14,17 @@ import 'package:leancloud_fake/bmob/type/bmob_relation.dart';
 
 ///Bmob对象基本类型
 abstract class BmobObject {
+  var needUpdate = Map<String, dynamic>();
   //创建时间
   String createdAt;
-
+  
+  void put(String key, value){
+    needUpdate[key] = value;
+  }
+  
   void setCreatedAt(String createdAt) {
     this.createdAt = createdAt;
+    needUpdate["createdAt"] = createdAt;
   }
 
   String getCreatedAt() {
@@ -29,6 +35,7 @@ abstract class BmobObject {
   String updatedAt;
 
   void setUpdatedAt(String updatedAt) {
+    needUpdate["updatedAt"] = updatedAt;
     this.updatedAt = updatedAt;
   }
 
@@ -41,6 +48,7 @@ abstract class BmobObject {
 
   void setObjectId(String objectId) {
     this.objectId = objectId;
+    needUpdate["objectId"] = objectId;
   }
 
   String getObjectId() {
@@ -53,6 +61,7 @@ abstract class BmobObject {
 
   void setAcl(BmobAcl bmobAcl) {
     this.ACL = bmobAcl.acl;
+    needUpdate["ACL"] = ACL;
   }
 
   BmobAcl getAcl() {
@@ -84,8 +93,12 @@ abstract class BmobObject {
 
   ///修改一条数据
   Future<BmobUpdated> update() async {
-    Map<String, dynamic> map = getParams();
-    String objectId = map[Bmob.BMOB_PROPERTY_OBJECT_ID];
+    Map<String, dynamic> map = needUpdate;
+    if(map.length == 0){
+      map = getParams();
+    }
+    
+    //String objectId = map[Bmob.BMOB_PROPERTY_OBJECT_ID];
     if (objectId.isEmpty || objectId == null) {
       BmobError bmobError =
           new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
@@ -98,6 +111,10 @@ abstract class BmobObject {
           Bmob.BMOB_API_CLASSES + tableName + Bmob.BMOB_API_SLASH + objectId,
           data: params);
       BmobUpdated bmobUpdated = BmobUpdated.fromJson(responseData);
+      if(bmobUpdated != null){
+        needUpdate.clear();
+      }
+      
       return bmobUpdated;
     }
   }

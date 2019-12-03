@@ -24,6 +24,7 @@ class Bmob {
   static const String BMOB_API_FILE_VERSION = "/1.1";
   static const String BMOB_API_CLASSES = BMOB_API_VERSION + "/classes/";
   static const String BMOB_API_USERS = BMOB_API_VERSION + "/users";
+  static const String BMOB_API_ME = BMOB_API_USERS + "/me";
 
   static const String BMOB_API_REQUEST_PASSWORD_RESET = BMOB_API_VERSION + "/requestPasswordReset";
 
