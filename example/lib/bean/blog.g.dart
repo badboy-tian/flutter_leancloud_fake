@@ -40,5 +40,5 @@ Map<String, dynamic> _$BlogToJson(Blog instance) => <String, dynamic>{
       'like': instance.like,
       'addr': instance.addr,
       'time': instance.time,
-      'pic': instance.pic
+      'pic': instance.pic,
     };

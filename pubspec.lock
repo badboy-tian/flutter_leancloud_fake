@@ -7,7 +7,7 @@ packages:
       name: analyzer
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.36.4"
+    version: "0.37.1+1"
   archive:
     dependency: transitive
     description:
@@ -192,7 +192,7 @@ packages:
       name: front_end
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.19"
+    version: "0.1.21+1"
   glob:
     dependency: transitive
     description:
@@ -269,14 +269,14 @@ packages:
       name: json_serializable
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.2.2"
+    version: "3.2.3"
   kernel:
     dependency: transitive
     description:
       name: kernel
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.19"
+    version: "0.3.21+1"
   logging:
     dependency: transitive
     description:
@@ -361,6 +361,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.0"
+  pretty_dio_logger:
+    dependency: "direct main"
+    description:
+      name: pretty_dio_logger
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.8"
   pub_semver:
     dependency: transitive
     description:

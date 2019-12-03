@@ -1,15 +1,15 @@
 class Bmob {
   //Bmob REST API 地址
-  static String bmobHost = "";
+  static String bmobHost;
 
   //Bmob 应用ID
-  static String bmobAppId = "";
+  static String bmobAppId;
 
   //Bmob REST API 密钥
-  static String bmobRestApiKey = "";
+  static String bmobRestApiKey;
 
   //Bmob REST API 管理密钥
-  static String bmobMasterKey = "";
+  static String bmobMasterKey;
 
   static const String BMOB_PROPERTY_OBJECT_ID = "objectId";
   static const String BMOB_PROPERTY_CREATED_AT = "createdAt";
@@ -55,17 +55,19 @@ class Bmob {
   static const int BMOB_ERROR_CODE_LOCAL = 1001;
 
   static const String BMOB_TABLE_TOLE="_Role";
+  static bool isDebug = false;
 
   //SDK初始化
-  static void init(appId, apiKey, baseUrl) {
+  static void init(appId, apiKey, baseUrl, bool debug) {
     bmobAppId = appId;
     bmobRestApiKey = apiKey;
     bmobHost = baseUrl;
+    isDebug = debug;
   }
 
   //SDK初始化，包含master key，允许操作其他用户
-  static void initMasterKey(appId, apiKey, masterKey, baseUrl) {
-    init(appId, apiKey, baseUrl);
+  static void initMasterKey(appId, apiKey, masterKey, baseUrl, bool debug) {
+    init(appId, apiKey, baseUrl, debug);
     bmobMasterKey = masterKey;
   }
 }

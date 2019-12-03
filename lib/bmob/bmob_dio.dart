@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'bmob.dart';
 
 class BmobDio {
@@ -35,6 +36,9 @@ class BmobDio {
     );
 
     dio = new Dio(options);
+    if (Bmob.isDebug) {
+      dio.interceptors.add(PrettyDioLogger(requestBody: true));
+    }
   }
 
   ///单例模式
@@ -49,26 +53,22 @@ class BmobDio {
   Future<dynamic> get(path, {data, cancelToken}) async {
     var requestUrl = options.baseUrl + path;
     var headers = options.headers.toString();
-    print('Get请求启动! url：$requestUrl ,body: $data ,headers:$headers');
     Response response = await dio.get(
       requestUrl,
       queryParameters: data,
       cancelToken: cancelToken,
     );
-    print('Get请求结果：' + response.toString());
     return response.data;
   }
 
-
   ///POST请求
-  Future<dynamic> upload(path, { data, cancelToken, String mime}) async {
-    if(mime != null){
+  Future<dynamic> upload(path, {data, cancelToken, String mime}) async {
+    if (mime != null) {
       //options.headers["Content-Type"] = mime;
       options.headers["content-type"] = mime;
     }
     var requestUrl = options.baseUrl + path;
     var headers = options.headers.toString();
-    print('Post请求启动! url：$requestUrl ,body: $data ,headers:$headers');
 
     Response response = await dio.post(
       requestUrl,
@@ -79,59 +79,47 @@ class BmobDio {
     //options.headers["Content-Type"] = "application/json";
     options.headers["content-type"] = "application/json";
 
-    print('Post请求结果：' + response.toString());
     return response == null ? null : response.data;
   }
 
   ///POST请求
   Future<dynamic> post(path, {data, cancelToken}) async {
-
     var requestUrl = options.baseUrl + path;
     var headers = options.headers.toString();
-    print('Post请求启动! url：$requestUrl ,body: $data ,headers:$headers');
     Response response = await dio.post(
       requestUrl,
       data: data,
       cancelToken: cancelToken,
     );
-    print('Post请求结果：' + response.toString());
     return response.data;
   }
 
   ///Delete请求
   Future<dynamic> delete(
-      path, {
-        data,
-        cancelToken,
-      }) async {
+    path, {
+    data,
+    cancelToken,
+  }) async {
     var requestUrl = options.baseUrl + path;
-    print('Delete请求启动! url：$requestUrl ,body: $data');
-    Response response =
-    await dio.delete(requestUrl, data: data, cancelToken: cancelToken);
-    print('Delete请求结果：' + response.toString());
+    Response response = await dio.delete(requestUrl, data: data, cancelToken: cancelToken);
     return response.data;
   }
 
   ///Put请求
   Future<dynamic> put(path, {data, cancelToken}) async {
     var requestUrl = options.baseUrl + path;
-    print('Put请求启动! url：$requestUrl ,body: $data');
-    Response response =
-    await dio.put(requestUrl, data: data, cancelToken: cancelToken);
-    print('Put请求结果：' + response.toString());
+    Response response = await dio.put(requestUrl, data: data, cancelToken: cancelToken);
     return response.data;
   }
 
   ///GET请求，自带请求路径
   Future<dynamic> getByUrl(requestUrl, {data, cancelToken}) async {
     var headers = options.headers.toString();
-    print('Get请求启动! url：$requestUrl ,body: $data ,headers:$headers');
     Response response = await dio.get(
       requestUrl,
       queryParameters: data,
       cancelToken: cancelToken,
     );
-    print('Get请求结果：' + response.toString());
     return response.data;
   }
 }

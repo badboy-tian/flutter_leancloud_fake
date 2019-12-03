@@ -38,5 +38,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'sessionToken': instance.sessionToken,
       'age': instance.age,
       'gender': instance.gender,
-      'nickname': instance.nickname
+      'nickname': instance.nickname,
     };

@@ -11,11 +11,15 @@ part 'bmob_file.g.dart';
 class BmobFile{
     @JsonKey(name: "__type")
     String type;
+    String bucket;
+    Metadata metaData;
+    String createdAt;
+    String mimeType;
+    String name;
     String url;
     String objectId;
-    String createdAt;
-    String name;
-    int size;
+    String updatedAt;
+
 
     BmobFile(){
      type="File";
@@ -31,6 +35,30 @@ class BmobFile{
 
     @override
     String toString() {
-        return 'BmobFile{type: $type, url: $url, objectId: $objectId, createdAt: $createdAt, name: $name, size: $size}';
+        return 'BmobFile{type: $type, bucket: $bucket, metaData: $metaData, createdAt: $createdAt, mimeType: $mimeType, name: $name, url: $url, objectId: $objectId, updatedAt: $updatedAt}';
+    }
+}
+
+class Metadata {
+    String owner;
+    int size;
+
+    Metadata({this.owner, this.size});
+
+    Metadata.fromJson(Map<String, dynamic> json) {
+        owner = json['owner'];
+        size = json['size'];
+    }
+
+    Map<String, dynamic> toJson() {
+        final Map<String, dynamic> data = new Map<String, dynamic>();
+        data['owner'] = this.owner;
+        data['size'] = this.size;
+        return data;
+    }
+
+    @override
+    String toString() {
+        return 'Metadata{owner: $owner, size: $size}';
     }
 }
