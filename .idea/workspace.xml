@@ -4,12 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d04fd6b-e774-4dd0-8ed8-47a2d7663d21" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/leancloud_fake/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/leancloud_fake/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leancloud.iml" beforeDir="false" afterPath="$PROJECT_DIR$/leancloud.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bmob/table/bmob_object.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bmob/table/bmob_object.dart" afterDir="false" />
-    </list>
+    <list default="true" id="0d04fd6b-e774-4dd0-8ed8-47a2d7663d21" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -91,9 +86,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,6 +137,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -193,9 +188,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="71" y="23" width="1977" height="1129" extended-state="6" />
+    <frame x="71" y="23" width="1977" height="1129" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24857882" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24857882" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -213,7 +208,7 @@
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.3297975" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.3297975" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.16972035" />
       <window_info anchor="bottom" id="Find" order="10" weight="0.3297975" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3297975" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -227,7 +222,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="首次提交" />
     <MESSAGE value="修改file结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改file结构" />
+    <MESSAGE value="更新逻辑修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新逻辑修改" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/lib/bmob/bmob_installation_manager.dart">
