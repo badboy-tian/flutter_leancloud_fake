@@ -94,6 +94,11 @@ class BmobDio {
     return response.data;
   }
 
+  Future<dynamic> postCloud(name, {data, cancelToken}){
+    var path = Bmob.BMOB_API_VERSION + Bmob.BMOB_API_CLOUD + "/" + name;
+    return post(path, data: data);
+  }
+
   ///Delete请求
   Future<dynamic> delete(
     path, {

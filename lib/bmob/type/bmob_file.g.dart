@@ -14,11 +14,13 @@ BmobFile _$BmobFileFromJson(Map<String, dynamic> json) {
         ? null
         : Metadata.fromJson(json['metaData'] as Map<String, dynamic>)
     ..createdAt = json['createdAt'] as String
-    ..mimeType = json['mimeType'] as String
+    ..mime_type = json['mime_type'] as String
     ..name = json['name'] as String
     ..url = json['url'] as String
     ..objectId = json['objectId'] as String
-    ..updatedAt = json['updatedAt'] as String;
+    ..updatedAt = json['updatedAt'] as String
+    ..key = json['key'] as String
+    ..provider = json['provider'] as String;
 }
 
 Map<String, dynamic> _$BmobFileToJson(BmobFile instance) => <String, dynamic>{
@@ -26,9 +28,11 @@ Map<String, dynamic> _$BmobFileToJson(BmobFile instance) => <String, dynamic>{
       'bucket': instance.bucket,
       'metaData': instance.metaData,
       'createdAt': instance.createdAt,
-      'mimeType': instance.mimeType,
+      'mime_type': instance.mime_type,
       'name': instance.name,
       'url': instance.url,
       'objectId': instance.objectId,
       'updatedAt': instance.updatedAt,
+      'key': instance.key,
+      'provider': instance.provider,
     };
