@@ -12,7 +12,7 @@ class BmobUtils {
       throw new BmobError(1002, "The object is not a BmobObject.");
     }
     String tableName;
-    if (object is BmobUser) {
+    if (object.runtimeType.toString().contains("User")) {
       tableName = Bmob.BMOB_TABLE_USER;
     } else if (object is BmobInstallation) {
       tableName = Bmob.BMOB_TABLE_INSTALLATION;

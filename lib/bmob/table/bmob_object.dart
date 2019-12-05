@@ -11,9 +11,11 @@ import 'package:leancloud_fake/bmob/type/bmob_geo_point.dart';
 import 'package:leancloud_fake/bmob/type/bmob_date.dart';
 import 'package:leancloud_fake/bmob/type/bmob_file.dart';
 import 'package:leancloud_fake/bmob/type/bmob_relation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 ///Bmob对象基本类型
 abstract class BmobObject {
+  @JsonKey(ignore: true)
   var needUpdate = Map<String, dynamic>();
   //创建时间
   String createdAt;
@@ -70,7 +72,9 @@ abstract class BmobObject {
     return bmobAcl;
   }
 
-  BmobObject();
+  BmobObject(){
+    
+  }
 
   Map getParams();
 
