@@ -17,6 +17,4 @@ class BmobDate {
 
   //此处与类名一致，由指令自动生成代码
   Map<String, dynamic> toJson() => _$BmobDateToJson(this);
-
-
 }

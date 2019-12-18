@@ -13,8 +13,8 @@ import 'package:leancloud_fake/bmob/type/bmob_file.dart';
 import 'package:leancloud_fake/bmob/type/bmob_relation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-///Bmob对象基本类型
-abstract class BmobObject {
+///Bmob对象基本类型 
+class BmobObject {
   @JsonKey(ignore: true)
   var needUpdate = Map<String, dynamic>();
   //创建时间
@@ -57,6 +57,12 @@ abstract class BmobObject {
     return this.objectId;
   }
 
+  static BmobObject createWithoutData(String className, String objectId) {
+    BmobObject object = new BmobObject(className: className);
+    object.setObjectId(objectId);
+    return object;
+  }
+
   //访问控制权限
   // ignore: non_constant_identifier_names
   Map<String, Object> ACL;
@@ -72,18 +78,23 @@ abstract class BmobObject {
     return bmobAcl;
   }
 
-  BmobObject(){
-    
-  }
+  String className = null;
+  BmobObject({this.className});
 
-  Map getParams();
+  Map getParams(){
+    return Map();
+  }
 
   ///新增一条数据
   Future<BmobSaved> save() async {
-    Map<String, dynamic> map = getParams();
+    Map<String, dynamic> map = needUpdate;
+    if(map.length == 0){
+      map = getParams();
+    }
+
     String params = getParamsJsonFromParamsMap(map);
     print(params);
-    String tableName = BmobUtils.getTableName(this);
+    String tableName = className ?? BmobUtils.getTableName(this);
     switch (tableName) {
       case "BmobInstallation":
         tableName = "_Installation";
@@ -185,7 +196,7 @@ abstract class BmobObject {
             Map pointer = new Map();
             pointer[Bmob.BMOB_PROPERTY_OBJECT_ID] = objectId;
             pointer[Bmob.BMOB_KEY_TYPE] = Bmob.BMOB_TYPE_POINTER;
-            pointer[Bmob.BMOB_KEY_CLASS_NAME] = BmobUtils.getTableName(value);
+            pointer[Bmob.BMOB_KEY_CLASS_NAME] = value.className ?? BmobUtils.getTableName(value);
             data[key] = pointer;
           }
         } else if (value is BmobGeoPoint) {

@@ -36,5 +36,12 @@ class BmobFile{
 
     //此处与类名一致，由指令自动生成代码
     Map<String, dynamic> toJson() => _$BmobFileToJson(this);
+
+    @override
+    String toString() {
+        return 'BmobFile{type: $type, bucket: $bucket, metaData: $metaData, createdAt: $createdAt, mime_type: $mime_type, name: $name, url: $url, objectId: $objectId, updatedAt: $updatedAt, key: $key, provider: $provider}';
+    }
+
+
 }
 
