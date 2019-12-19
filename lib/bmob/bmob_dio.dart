@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bmob.dart';
@@ -61,6 +62,8 @@ class BmobDio {
       if (Bmob.isDebug) {
         dio.interceptors.add(PrettyDioLogger(requestBody: true));
       }
+      
+      dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: Bmob.bmobHost)).interceptor);
     });
   }
 
@@ -106,7 +109,7 @@ class BmobDio {
   }
 
   ///POST请求
-  Future<dynamic> post(path, {data, cancelToken}) async {
+  Future<dynamic> post(path, {data, cancelToken, cacheDays = 0}) async {
     var requestUrl = options.baseUrl + path;
     var headers = options.headers.toString();
     try {
@@ -114,6 +117,7 @@ class BmobDio {
         requestUrl,
         data: data,
         cancelToken: cancelToken,
+        options: buildCacheOptions(Duration(days: cacheDays))
       );
 
       return response.data;
@@ -122,9 +126,9 @@ class BmobDio {
     }
   }
 
-  Future<dynamic> postCloud(name, {data, cancelToken}) {
+  Future<dynamic> postCloud(name, {data, cancelToken, cacheDays = 0}) {
     var path = Bmob.BMOB_API_VERSION + Bmob.BMOB_API_CLOUD + "/" + name;
-    return post(path, data: data);
+    return post(path, data: data, cacheDays: cacheDays);
   }
 
   ///Delete请求
