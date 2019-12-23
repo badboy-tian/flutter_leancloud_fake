@@ -12,6 +12,7 @@ BmobInstallation _$BmobInstallationFromJson(Map<String, dynamic> json) {
     ..updatedAt = json['updatedAt'] as String
     ..objectId = json['objectId'] as String
     ..ACL = json['ACL'] as Map<String, dynamic>
+    ..className = json['className'] as String
     ..deviceType = json['deviceType'] as String
     ..installationId = json['installationId'] as String
     ..timeZone = json['timeZone'] as String
@@ -24,6 +25,7 @@ Map<String, dynamic> _$BmobInstallationToJson(BmobInstallation instance) =>
       'updatedAt': instance.updatedAt,
       'objectId': instance.objectId,
       'ACL': instance.ACL,
+      'className': instance.className,
       'deviceType': instance.deviceType,
       'installationId': instance.installationId,
       'timeZone': instance.timeZone,

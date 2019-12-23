@@ -7,6 +7,7 @@ import 'package:leancloud_fake/bmob/response/bmob_handled.dart';
 import 'package:leancloud_fake/bmob/response/bmob_updated.dart';
 import 'package:leancloud_fake/bmob/type/bmob_acl.dart';
 import 'package:leancloud_fake/bmob/bmob_utils.dart';
+import 'package:leancloud_fake/bmob/type/bmob_array.dart';
 import 'package:leancloud_fake/bmob/type/bmob_geo_point.dart';
 import 'package:leancloud_fake/bmob/type/bmob_date.dart';
 import 'package:leancloud_fake/bmob/type/bmob_file.dart';
@@ -215,6 +216,9 @@ class BmobObject {
         } else if (value is BmobRelation) {
           BmobRelation bmobRelation = value;
           data[key] = bmobRelation.toJson();
+        } else if(value is BmobArray){
+          BmobArray array = value;
+          data[key] = array.toJson();
         } else {
           //非Pointer类型
           data[key] = value;

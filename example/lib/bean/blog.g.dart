@@ -12,6 +12,7 @@ Blog _$BlogFromJson(Map<String, dynamic> json) {
     ..updatedAt = json['updatedAt'] as String
     ..objectId = json['objectId'] as String
     ..ACL = json['ACL'] as Map<String, dynamic>
+    ..className = json['className'] as String
     ..title = json['title'] as String
     ..content = json['content'] as String
     ..author = json['author'] == null
@@ -34,6 +35,7 @@ Map<String, dynamic> _$BlogToJson(Blog instance) => <String, dynamic>{
       'updatedAt': instance.updatedAt,
       'objectId': instance.objectId,
       'ACL': instance.ACL,
+      'className': instance.className,
       'title': instance.title,
       'content': instance.content,
       'author': instance.author,

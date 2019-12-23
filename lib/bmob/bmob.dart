@@ -60,6 +60,8 @@ class Bmob {
   static const String BMOB_TABLE_TOLE="_Role";
   static bool isDebug = false;
 
+  static String BMOB_TABLE_FILE = "_File";
+
   //SDK初始化
   static void init(appId, apiKey, baseUrl, bool debug) {
     bmobAppId = appId;

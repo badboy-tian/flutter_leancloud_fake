@@ -39,6 +39,33 @@ class BmobFileManager {
     return bmobFile;
   }
 
+  ///文件上传
+  ///method:POST
+  ///body:文本或者二进制流
+  ///Content-Type:不同类型文件使用不同的值
+  static Future<BmobFile> uploadWithBytes(Uint8List data, String path) async {
+    String allPath = path;
+    int indexSlash = allPath.lastIndexOf("/");
+    if (indexSlash == -1) {
+      throw BmobError(9016, "The file's path is available.");
+    }
+    String fileName = allPath.substring(indexSlash, allPath.length);
+    int indexPoint = fileName.indexOf(".");
+    bool one = indexPoint < fileName.length - 1;
+    bool two = fileName.contains(".");
+    bool hasSuffix = one && two;
+    if (!hasSuffix) {
+      throw BmobError(9016, "The file has no suffix.");
+    }
+
+    var mime = lookupMimeType(path);
+    String realPath = "${Bmob.BMOB_API_FILE_VERSION}${Bmob.BMOB_API_FILE}${fileName}";
+    //获取所上传文件的二进制流
+    Map responseData = await BmobDio.getInstance().upload(realPath, data: Stream.fromIterable(data.map((e) => [e])), mime: mime);
+    BmobFile bmobFile = BmobFile.fromJson(responseData);
+    return bmobFile;
+  }
+
   ///文件删除
   ///method:delete
   static Future<BmobHandled> delete(String fileObjId) async {
