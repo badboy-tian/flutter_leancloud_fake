@@ -25,6 +25,10 @@ class BmobObject {
     needUpdate[key] = value;
   }
   
+  void get(String key){
+    return needUpdate[key] ?? null;
+  }
+  
   void setCreatedAt(String createdAt) {
     this.createdAt = createdAt;
     needUpdate["createdAt"] = createdAt;
