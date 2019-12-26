@@ -53,7 +53,7 @@ class Bmob {
 
   static const String BMOB_TABLE_INSTALLATION = "_Installation";
 
-  static const String BMOB_ERROR_OBJECT_ID = "ObjectId is null or empty.";
+  static const String BMOB_ERROR_OBJECT_ID = "ObjectId is null or empty or param is empty.";
 
   static const int BMOB_ERROR_CODE_LOCAL = 1001;
 

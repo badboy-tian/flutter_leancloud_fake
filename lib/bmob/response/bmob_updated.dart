@@ -17,6 +17,10 @@ class BmobUpdated{
   //此处与类名一致，由指令自动生成代码
   Map<String, dynamic> toJson() => _$BmobUpdatedToJson(this);
 
+  @override
+  String toString() {
+    return 'BmobUpdated{updatedAt: $updatedAt}';
+  }
 
 
 }

@@ -18,17 +18,18 @@ import 'package:json_annotation/json_annotation.dart';
 class BmobObject {
   @JsonKey(ignore: true)
   var needUpdate = Map<String, dynamic>();
+
   //创建时间
   String createdAt;
-  
-  void put(String key, value){
+
+  void put(String key, value) {
     needUpdate[key] = value;
   }
-  
-  void get(String key){
+
+  void get(String key) {
     return needUpdate[key] ?? null;
   }
-  
+
   void setCreatedAt(String createdAt) {
     this.createdAt = createdAt;
     needUpdate["createdAt"] = createdAt;
@@ -84,16 +85,17 @@ class BmobObject {
   }
 
   String className = null;
+
   BmobObject({this.className});
 
-  Map getParams(){
+  Map getParams() {
     return Map();
   }
 
   ///新增一条数据
   Future<BmobSaved> save() async {
     Map<String, dynamic> map = needUpdate;
-    if(map.length == 0){
+    if (map.length == 0) {
       map = getParams();
     }
 
@@ -111,30 +113,34 @@ class BmobObject {
     return bmobSaved;
   }
 
+  Future<dynamic> fetch({String include}) async {
+    if (include == null || include.isEmpty) {
+      return await BmobDio.getInstance().get(Bmob.BMOB_API_CLASSES + className + Bmob.BMOB_API_SLASH + objectId);
+    }
+
+    return await BmobDio.getInstance().get(Bmob.BMOB_API_CLASSES + className + Bmob.BMOB_API_SLASH + objectId, data: {"include": include});
+  }
+
   ///修改一条数据
   Future<BmobUpdated> update() async {
     Map<String, dynamic> map = needUpdate;
-    if(map.length == 0){
+    if (map.length == 0) {
       map = getParams();
     }
-    
+    String params = getParamsJsonFromParamsMap(map);
     //String objectId = map[Bmob.BMOB_PROPERTY_OBJECT_ID];
-    if (objectId.isEmpty || objectId == null) {
+    if (objectId.isEmpty || objectId == null || map.isEmpty) {
       BmobError bmobError =
-          new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
+      new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
       throw bmobError;
     } else {
-      String params = getParamsJsonFromParamsMap(map);
-      print(params);
-      String tableName = BmobUtils.getTableName(this);
-      Map responseData = await BmobDio.getInstance().put(
-          Bmob.BMOB_API_CLASSES + tableName + Bmob.BMOB_API_SLASH + objectId,
-          data: params);
+      String tableName = className ?? BmobUtils.getTableName(this);
+      Map responseData = await BmobDio.getInstance().put(Bmob.BMOB_API_CLASSES + tableName + Bmob.BMOB_API_SLASH + objectId, data: params);
       BmobUpdated bmobUpdated = BmobUpdated.fromJson(responseData);
-      if(bmobUpdated != null){
+      if (bmobUpdated != null) {
         needUpdate.clear();
       }
-      
+
       return bmobUpdated;
     }
   }
@@ -145,7 +151,7 @@ class BmobObject {
     String objectId = map[Bmob.BMOB_PROPERTY_OBJECT_ID];
     if (objectId.isEmpty || objectId == null) {
       BmobError bmobError =
-          new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
+      new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
       throw bmobError;
     } else {
       String tableName = BmobUtils.getTableName(this);
@@ -162,7 +168,7 @@ class BmobObject {
     String objectId = map[Bmob.BMOB_PROPERTY_OBJECT_ID];
     if (objectId.isEmpty || objectId == null) {
       BmobError bmobError =
-          new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
+      new BmobError(Bmob.BMOB_ERROR_CODE_LOCAL, Bmob.BMOB_ERROR_OBJECT_ID);
       throw bmobError;
     } else {
       String tableName = BmobUtils.getTableName(this);
@@ -220,7 +226,7 @@ class BmobObject {
         } else if (value is BmobRelation) {
           BmobRelation bmobRelation = value;
           data[key] = bmobRelation.toJson();
-        } else if(value is BmobArray){
+        } else if (value is BmobArray) {
           BmobArray array = value;
           data[key] = array.toJson();
         } else {
